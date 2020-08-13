@@ -55,7 +55,7 @@ class AudioPlotView: UIView {
         context.clear(rect)
         context.setFillColor(red: 0, green: 0, blue: 0, alpha: 0)
         context.fill(rect)
-        context.setLineWidth(1)
+        context.setLineWidth(5)
         context.setStrokeColor(self.color)
         let w = rect.size.width
         let h = rect.size.height
@@ -98,10 +98,12 @@ class AudioPlotView: UIView {
             }
             context.move(to: CGPoint(x: oneX, y: m))
             context.addLine(to: CGPoint(x: oneX, y: oneY))
-            context.addArc(center: CGPoint(x: twoX, y: twoY), radius: r, startAngle: twoS, endAngle: twoE, clockwise: twoC)
-            context.addLine(to: CGPoint(x: threeX, y: threeY))
+            //context.addArc(center: CGPoint(x: twoX, y: twoY), radius: r, startAngle: twoS, endAngle: twoE, clockwise: twoC)
+            //context.addLine(to: CGPoint(x: threeX, y: threeY))
             context.strokePath()
-            bar += 1
+            if i % 2 == 1 {
+                bar += 2
+            }
         }
     }
 }

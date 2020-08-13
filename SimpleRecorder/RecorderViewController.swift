@@ -109,7 +109,12 @@ class RecorderViewController: UIViewController {
     
     @IBAction func settingsButtonTap(_ sender: Any) {
         let url = URL(string: UIApplicationOpenSettingsURLString)!
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            // Fallback on earlier versions
+            UIApplication.shared.openURL(url)
+        }
     }
     
     @IBAction func recordButtonTap(_ sender: Any) {
@@ -135,7 +140,7 @@ class RecorderViewController: UIViewController {
             self.recorderPlot.isHidden = false
             self.timeLabel.isHidden = false
             self.infoLabel.isHidden = true
-            self.resultsButton.isHidden = true
+            //self.resultsButton.isHidden = true
             break
         case .stopped:
             UIApplication.shared.isIdleTimerDisabled = false
@@ -146,7 +151,7 @@ class RecorderViewController: UIViewController {
             self.recorderPlot.isHidden = true
             self.timeLabel.isHidden = true
             self.infoLabel.isHidden = false
-            self.resultsButton.isHidden = false
+            //self.resultsButton.isHidden = false
             break
         case .denied:
             UIApplication.shared.isIdleTimerDisabled = false
@@ -156,7 +161,7 @@ class RecorderViewController: UIViewController {
             self.recorderPlot.isHidden = true
             self.timeLabel.isHidden = true
             self.infoLabel.isHidden = true
-            self.resultsButton.isHidden = true
+            //self.resultsButton.isHidden = true
             break
         }
     }
